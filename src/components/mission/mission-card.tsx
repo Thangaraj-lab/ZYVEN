@@ -3,49 +3,12 @@
 import * as React from "react";
 import { useLocale } from "next-intl";
 import { CalendarClock, ExternalLink, Timer } from "lucide-react";
-import { siLinkedin, siWhatsapp, siInstagram } from "simple-icons";
 import { cn } from "@/lib/utils";
+import { BrandIcon } from "@/components/brand-icons";
 import { formatDate } from "@/lib/timeAgo";
 import { ease, layoutIds } from "@/lib/motion";
 import { motion } from "motion/react";
 import type { Brand, MissionUIState, MissionWithState } from "@/lib/data/types";
-
-/** Flat 2D brand icon via simple-icons (no 3D). */
-export function BrandIcon({ brand, className }: { brand: Brand; className?: string }) {
-  const map: Partial<Record<Brand, { path: string; color: string; label: string }>> = {
-    linkedin: { path: siLinkedin.path, color: "#0A66C2", label: "LinkedIn" },
-    whatsapp: { path: siWhatsapp.path, color: "#25D366", label: "WhatsApp" },
-    instagram: { path: siInstagram.path, color: "#E4405F", label: "Instagram" },
-  };
-  const b = map[brand];
-  if (!b) {
-    return (
-      <span
-        aria-label={brand}
-        className={cn(
-          "flex items-center justify-center rounded-2xl bg-primary/10 text-primary",
-          className ?? "size-12",
-        )}
-      >
-        <ExternalLink className="size-5" />
-      </span>
-    );
-  }
-  return (
-    <span
-      role="img"
-      aria-label={b.label}
-      className={cn(
-        "flex items-center justify-center rounded-2xl",
-        className ?? "size-12 bg-surface-2",
-      )}
-    >
-      <svg viewBox="0 0 24 24" fill={b.color} className="size-6">
-        <path d={b.path} />
-      </svg>
-    </span>
-  );
-}
 
 const stateCtaKey: Record<MissionUIState, string> = {
   AVAILABLE: "start",
@@ -71,7 +34,7 @@ export function MissionCard({
 }: {
   mission: MissionWithState;
   /** translations for missions namespace */
-  t: (key: string) => string;
+  t: (key: string, values?: Record<string, string | number>) => string;
   tc: (key: string) => string;
   onClick?: () => void;
   cta?: React.ReactNode;

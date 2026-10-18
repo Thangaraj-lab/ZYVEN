@@ -33,7 +33,7 @@ export function Providers({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <ThemeProvider attribute="class" defaultTheme="light" enableSystem transitions={false}>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
         <QueryClientProvider client={qc}>
           <TooltipProvider delayDuration={300}>
             <LiveBridge />

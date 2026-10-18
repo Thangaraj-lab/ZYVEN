@@ -30,9 +30,7 @@ import type {
 export interface Repository {
   /* session + accounts */
   getSession(): Promise<Session>;
-  loginWithGoogleMock(email?: string): Promise<Session>;
   loginWithEmail(email: string, password: string): Promise<Session>;
-  loginAdminMock(): Promise<Session>;
   logout(): Promise<void>;
   registerAmbassador(input: RegisterInput): Promise<Session>;
   updateProfile(patch: Partial<AmbassadorProfile>): Promise<AmbassadorProfile>;
@@ -79,13 +77,6 @@ export interface Repository {
   getAdminStats(): Promise<AdminStats>;
   getAuditLog(): Promise<AuditLog[]>;
 
-  /* dev helpers (mock only) */
-  resetSeed(): Promise<void>;
-  setSubmissionState(id: string, state: Submission["state"]): Promise<void>;
-  simulateAdminApproveLatest(): Promise<Submission | null>;
-  loadProgressDemo(): Promise<void>;
-  setApprovalRequired(v: boolean): Promise<void>;
-  setSlowNetwork(v: boolean): Promise<void>;
   subscribe(cb: () => void): () => void;
 }
 

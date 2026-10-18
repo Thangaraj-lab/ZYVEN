@@ -52,10 +52,12 @@ export function useMockLiveUpdates() {
   useEffect(() => {
     let unsub: (() => void) | undefined;
     let alive = true;
-    void call((repo) => repo.subscribe(() => invalidateAll(qc))).then((u) => {
-      if (alive) unsub = u;
-      else u();
-    });
+    void call(async (repo) => repo.subscribe(() => invalidateAll(qc)) as unknown as () => void).then(
+      (u) => {
+        if (alive) unsub = u;
+        else u();
+      },
+    );
     return () => {
       alive = false;
       unsub?.();

@@ -5,7 +5,6 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { ease } from "@/lib/motion";
 
 const buttonVariants = cva(
   "inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-[12px] px-4 text-sm font-semibold transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -56,7 +55,6 @@ function LoadingDots() {
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, loading, children, disabled, ...props }, ref) => {
-    const Comp = asChild ? Slot : motion.button;
     const content = loading ? <LoadingDots /> : children;
     if (asChild) {
       return (
@@ -70,12 +68,13 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       );
     }
     return (
-      <motion.button
+      <button
         ref={ref}
-        whileHover={disabled || loading ? undefined : { y: -1 }}
-        whileTap={disabled || loading ? undefined : { scale: 0.97 }}
-        transition={ease.spring}
-        className={cn(buttonVariants({ variant, size }), className)}
+        className={cn(
+          buttonVariants({ variant, size }),
+          "transition-transform duration-150 hover:-translate-y-px active:scale-[0.97]",
+          className,
+        )}
         disabled={disabled || loading}
         {...props}
       >
@@ -86,7 +85,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           />
         )}
         {content}
-      </motion.button>
+      </button>
     );
   },
 );
