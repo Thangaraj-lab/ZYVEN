@@ -1,0 +1,419 @@
+landing.heroEyebrow|Founding Cohort · தமிழ்நாடு
+landing.heroTitle|Zyven Student Ambassador ஆகுங்கள்
+landing.heroSubtitle|ரியல் மிஷன்களை முடிக்கவும், transparent ledger-ல் புள்ளிகள் பெறவும், லீடர்போர்டில் மேலே செல்லவும், reward tiers-ஐ unlock செய்யவும் — உங்கள் personal brand-உம் கட்டுங்கள்.
+landing.ctaRegister|Ambassador ஆக பதிவு செய்யுங்கள்
+landing.ctaHow|எப்படி வேலை செய்கிறது பாருங்கள்
+landing.chipTasks|Task முடிக்கவும்
+landing.chipPoints|புள்ளிகள் பெறவும்
+landing.chipRank|லீடர்போர்டில் ஏறவும்
+landing.cohortTitle|Founding Cohort
+landing.cohortLine|{goal}-ல் {count} ambassadors இணைந்தார்கள்
+landing.whatTitle|நிரல் என்றால் என்ன?
+landing.whatBody|Zyven தமிழ்நாட்டின் கல்லூரிகளுடன் கூட்டு வைக்கிறது. Ambassador ஆக நீங்கள் verified missions செய்வீர்கள் — சோஷியல் போஸ்ட்கள், community வளர்ச்சி, campus events — proof அட்மின்கள் review செய்து, புள்ளிகள் தந்து, Bronze, Silver, Gold, Champion tiers-ல் உயர்த்துவார்கள்.
+landing.howTitle|எப்படி வேலை செய்கிறது
+landing.howSubtitle|ஐந்து நிலைகள், ஒரு loop: Discover → Act → Submit → Verify → Earn.
+landing.stage1Title|Discover
+landing.stage1Body|உங்கள் ஆர்வத்திற்கு ஏற்ற live missions பார்த்து தேர்வு செய்யவும்.
+landing.stage2Title|Act
+landing.stage2Body|Follow, post, join — ஒவ்வொரு step-ஆக வழிகாட்டப்படும்.
+landing.stage3Title|Proof submit
+landing.stage3Body|Post URL paste செய்யவும் அல்லது screenshot upload செய்யவும்.
+landing.stage4Title|Verify
+landing.stage4Body|அட்மின்கள் proof review செய்வார்கள் — பொதுவாக 24 மணி நேரத்தில்.
+landing.stage5Title|Earn & rank
+landing.stage5Body|புள்ளிகள் transparent ledger-ல் சேரும். Rank, tier உடனே update ஆகும்.
+landing.featuredTitle|Featured missions
+landing.featuredSubtitle|தொடக்கத்தில் இரண்டு live. வாரம் தோறும் புதியவை.
+landing.whyTitle|Ambassador ஆக ஏன்?
+landing.benefit1Title|புள்ளிகள் பலனளிக்கும்
+landing.benefit1Body|ஒவ்வொரு approved mission-உம் transparent, tamper-proof ledger-ல் சேரும்.
+landing.benefit2Title|அங்கீகாரம்
+landing.benefit2Body|Top ambassadors public-ல் அறிவிக்கப்படுவார்கள்; campus-ல் featured ஆவார்கள்.
+landing.benefit3Title|Reward tiers
+landing.benefit3Body|Bronze, Silver, Gold, Champion perks — நீங்கள் வளர வளர unlock ஆகும்.
+landing.benefit4Title|சான்றிதழ்கள் (விரைவில்)
+landing.benefit4Body|Top performers-க்கு Certificate of Recognition — இந்த cohort-க்கு திட்டமிடப்பட்டுள்ளது.
+landing.benefit5Title|Community
+landing.benefit5Body|கல்லூரிகள் முழுவதும் உள்ள ambitious students-உடன் WhatsApp community-வில் இணையவும்.
+landing.benefit6Title|வாய்ப்புகள்
+landing.benefit6Body|Internship, events-க்கு priority access — fast-track consideration, guarantee அல்ல.
+landing.boardTitle|Live leaderboard preview
+landing.boardCta|முழு லீடர்போர்டு பார்க்கவும்
+landing.battleTitle|College battle
+landing.faqTitle|அடிக்கடி கேட்கப்படும் கேள்விகள்
+landing.faqQ1|யார் join செய்யலாம்?
+landing.faqA1|தமிழ்நாட்டில் படிக்கும் எந்த college student-உம். கல்லூரி விவரங்களுடன் பதிவு செய்து, சில நிமிடங்களில் profile complete செய்யலாம்.
+landing.faqQ2|கட்டணம் உண்டா?
+landing.faqA2|இல்லை. நிரல் இலவசம்; நீங்கள் time கொடுக்கவும், verification, rewards எங்கள் பக்கம்.
+landing.faqQ3|புள்ளிகள் எப்படி award ஆகும்?
+landing.faqA3|அட்மின் proof approve செய்தவுடன், அந்த submission-க்கு ஒரு முறை மட்டுமே ledger-ல் புள்ளிகள் எழுதப்படும். Double approval ஆனாலும் double award ஆகாது.
+landing.faqQ4|Verification எంత நேரம்?
+landing.faqA4|பொதுவாக 24 மணி நேரத்திற்குள். ஒவ்வொரு submission-உம் எந்த state-ல் உள்ளது என்று timeline-ல் தெரியும்.
+landing.faqQ5|என்ன வெல்லலாம்?
+landing.faqA5|Tier unlocks: 50 pts-ல் Bronze, 150-ல் Silver, 300-ல் Gold, 500-ல் Champion — merch, certificates, opportunity fast-tracks திட்டத்தில்.
+landing.faqQ6|என் college compete ஆகுமா?
+landing.faqA6|ஆம் — college-vs-college leaderboard அனைத்து member புள்ளிகளையும் கூட்டும். உங்கள் campus-ஐ மேலே கொண்டு செல்லுங்கள்.
+landing.ctaFinalTitle|Founding cohort நிரம்புகிறது
+landing.ctaFinalBody|முதல் 100 Zyven Student Ambassadors-ல் ஒருவராகுங்கள். உங்கள் number உங்கள் கதையாகும்.
+landing.marqueeColleges|MEC · KSR · Kongu · PSG · Sona · SRM
+auth.loginTitle|மீண்டும் வருக
+auth.loginSubtitle|உங்கள் ambassador portal-ல் உள்நுழையுங்கள்
+auth.google|Google மூலம் தொடரவும்
+auth.orEmail|அல்லது email மூலம்
+auth.email|மின்னஞ்சல்
+auth.password|கடவுச்சொல்
+auth.noAccount|Account இல்லையா?
+auth.registerLink|Ambassador ஆக பதிவு செய்யுங்கள்
+auth.adminLink|Admin login
+auth.loginButton|உள்நுழை
+auth.invalidCredentials|தவறான email அல்லது password.
+auth.noAccountError|அந்த email-க்கு account இல்லை. முதலில் பதிவு செய்யுங்கள்.
+auth.registerTitle|Zyven Ambassador ஆகுங்கள்
+auth.stepAccount|Account
+auth.stepAcademic|கல்வி விவரம்
+auth.stepSocial|Social
+auth.stepProfile|Ambassador profile
+auth.name|முழு பெயர்
+auth.phone|தொலைபேசி (optional)
+auth.createAccount|Account உருவாக்கு
+auth.college|கல்லூரி
+auth.selectCollege|உங்கள் கல்லூரியை தேடுங்கள்…
+auth.otherCollege|மற்றவை (கீழ் டைப் செய்யவும்)
+auth.department|துறை
+auth.year|படிக்கும் வருடம்
+auth.yearN|Year {n}
+auth.city|ஊர்
+auth.studentId|Student ID (optional)
+auth.linkedinUrl|LinkedIn URL (optional)
+auth.instagramUrl|Instagram URL (optional)
+auth.interests|எது உங்களுக்கு பிடிக்கும்?
+auth.interest.social|சோஷியல் மீடியா
+auth.interest.content|Content creation
+auth.interest.events|Event hosting
+auth.interest.community|Community building
+auth.interest.design|Design
+auth.interest.tech|Tech & AI
+auth.interest.speaking|Public speaking
+auth.interest.branding|Personal branding
+auth.skills|Skills (comma separated)
+auth.whyJoin|ஏன் join செய்ய விரும்புகிறீர்கள்?
+auth.whyJoinCounter|500 எழுத்தில் {count}
+auth.agreeTerms|Terms of Service ஒப்புக்கொள்கிறேன்
+auth.agreePrivacy|Privacy Policy ஒப்புக்கொள்கிறேன்
+auth.agreeGuidelines|Ambassador Guidelines பின்பற்றுவேன்
+auth.turnstileNote|Invisible bot check மூலம் பாதுகாக்கப்படுகிறது (production-ல் Cloudflare Turnstile பயன்படுத்தவும்).
+auth.submitRegister|விண்ணப்பம் அனுப்பு
+auth.emailTaken|அந்த email-ல் ஏற்கனவே account உள்ளது.
+auth.requiredField|இந்த field அவசியம்.
+auth.invalidEmail|சரியான email enter செய்யுங்கள்.
+auth.invalidUrl|சரியான URL enter செய்யுங்கள்.
+auth.minChars|குறைந்தது {min} எழுతుகள் எழுதுங்கள்.
+auth.mustAgree|மூன்று agreements-உம் ஏற்க வேண்டும்.
+auth.draftSaved|Draft தானாக சேமிக்கப்பட்டது
+auth.pendingTitle|விண்ணப்பம் review-ல் உள்ளது
+auth.pendingBody|உங்கள் விண்ணப்பம் பெறப்பட்டது. அட்மின் விரைவில் review செய்வார் — உள்ளே நுழன்றவுடன் அறிவிப்பு வரும்.
+auth.welcomeTitle|Founding Cohort-க்கு வரவேற்கிறோம், {name}
+auth.welcomeCohort|Founding Ambassador
+auth.welcomeSkip|Dashboard-க்கு செல்லுங்கள்
+auth.entering|உள்நுழைகிறோம்…
+dashboard.greetingMorning|காலை வணக்கம், {name}
+dashboard.greetingAfternoon|மதிய வணக்கம், {name}
+dashboard.greetingEvening|இரவு வணக்கம், {name}
+dashboard.rankLabel|உங்கள் rank
+dashboard.ofTotal|{count} ambassadors-ல்
+dashboard.pointsLabel|புள்ளிகள்
+dashboard.toNextTier|{tier}-க்கு {points} புள்ளிகள்
+dashboard.maxTier|Top tier அடைந்தீர்கள் — legendary!
+dashboard.firstMissionTitle|உங்கள் முதல் mission காத்திருக்கிறது
+dashboard.firstMissionBody|0 புள்ளிகள் — perfect. உங்கள் முதல் approval founding legend ஆக்கும். LinkedIn mission-ஆக தொடங்குங்கள்: 50 புள்ளிகள், சுமார் 10 நிமிடம்.
+dashboard.startFirst|முதல் mission தொடங்குங்கள்
+dashboard.nextMissions|அடுத்த missions
+dashboard.completedRow|முடித்தவை
+dashboard.snapshotTitle|Leaderboard snapshot
+dashboard.viewFull|முழு லீடர்போர்டு பாருங்கள்
+dashboard.nextReward|அடுத்த reward
+dashboard.announcements|அறிவிப்புகள்
+dashboard.collegeBattle|College battle
+dashboard.tapForColleges|College leaderboard திறக்க touch செய்யுங்கள்
+missions.title|Missions
+missions.subtitle|Mission முடிக்கவும், proof submit செய்யவும், புள்ளிகள் பெறவும்.
+missions.filterAll|அனைத்தும்
+missions.filterAvailable|Available
+missions.filterReview|Review-ல்
+missions.filterCompleted|Completed
+missions.filterLocked|விரைவில்
+missions.empty|இன்னும் எதுவும் இல்லை — புதிய missions வாரம் தோறும் வரும்.
+missions.lockedTooltip|புதிய missions விரைவில்
+missions.points|{count} pts
+missions.minutes|~{count} நிமிடம்
+missions.difficultyEasy|எளிது
+missions.difficultyMedium|நடுத்தரம்
+missions.difficultyHard|கடினம்
+missions.deadline|Deadline {date}
+missions.deadlinePassed|Deadline முடிந்தது
+missions.paused|Pause
+missions.start|Mission தொடங்கு
+missions.continueText|தொடரவும்
+missions.reviewProgress|Progress review
+missions.viewSubmission|Submission பாருங்கள்
+missions.resubmit|மீண்டும் submit
+missions.done|முடிந்தது
+missionDetail.followOnLinkedin|LinkedIn-ல் Zyven-ஐ follow செய்யுங்கள்
+missionDetail.joinWhatsapp|Zyven WhatsApp Community-ல் இணையுங்கள்
+missionDetail.openedConfirm|Open ஆனது — திரும்பி confirm செய்யுங்கள்
+missionDetail.iveDone|நான் இதை செய்தேன்
+missionDetail.createPost|உங்கள் post எழுதுங்கள்
+missionDetail.templateEn|English
+missionDetail.templateTa|தமிழ்
+missionDetail.copyTemplate|Template copy
+missionDetail.templateCopied|+ template copied
+missionDetail.openComposer|LinkedIn composer திறக்கவும்
+missionDetail.submitProofTitle|Proof submit
+missionDetail.postUrlLabel|உங்கள் LinkedIn post URL
+missionDetail.postUrlPlaceholder|https://www.linkedin.com/posts/…
+missionDetail.urlValid|சரி இருக்கிறது
+missionDetail.urlInvalidLinkedin|Publish செய்த post-உட linkedin.com/posts/… அல்லது /feed/update/… link பயன்படுத்துங்கள்.
+missionDetail.urlRequired|இந்த mission-க்கு post URL அவசியம்.
+missionDetail.duplicateUrl|அந்த URL ஏற்கனவே இந்த mission-க்கு submit ஆகிவிட்டது. உங்கள் புதிய post-ஐ submit செய்யுங்கள்.
+missionDetail.uploadScreenshot|Screenshot upload செய்யுங்கள்
+missionDetail.screenshotHint|PNG/JPG — upload-க்கு முன் locally ≤1MB ஆக compress ஆகும்.
+missionDetail.screenshotRequired|இந்த mission-க்கு screenshot அவசியம்.
+missionDetail.remove|நீக்கு
+missionDetail.compressing|Compress ஆகிறது…
+missionDetail.fileTooLarge|Compress செய்த பிறகும் file too large (max 5MB).
+missionDetail.notAnImage|Image file தேர்வு செய்யுங்கள்.
+missionDetail.noteOptional|Reviewer-க்கு note (optional)
+missionDetail.submitButton|Review-க்கு submit
+missionDetail.verifyNote|Verification பொதுவாக 24 மணி நேரத்தில் முடியும்.
+missionDetail.stepDone|முடிந்தது
+missionDetail.lockedStep|முந்தைய step முடித்தால் இது unlock ஆகும்
+missionDetail.submittedTitle|Submit ஆனது!
+missionDetail.submittedBody|24 மணி நேரத்தில் verify செய்கிறோம்.
+missionDetail.timelineTitle|Review timeline
+missionDetail.stateSubmitted|Submit ஆனது
+missionDetail.stateUnderReview|Review-ல்
+missionDetail.stateApproved|Approve ஆனது
+missionDetail.stateRejected|கவனம் தேவை
+missionDetail.stateChanges|மாற்றம் கேட்கப்படுகிறது
+missionDetail.approvedBody|{date}-ல் {points} புள்ளிகள் பெற்றீர்கள். நல்ல வேலை!
+missionDetail.shareCompletion|LinkedIn-ல் share: “என் முதல் Zyven mission முடித்தேன்”
+missionDetail.rejectedTitle|Almost there — இதை fix செய்யுங்கள்
+missionDetail.rejectedReason|Reviewer note:
+missionDetail.updateSubmission|Submission update
+missionDetail.missionPausedBody|இந்த mission தற்காலிகமாக pause. உங்கள் progress safe-ஆ உள்ளது.
+missionDetail.deadlinePassedBody|Deadline முடிந்துவிட்டது. அடுத்த drop-க்காக காத்திருங்கள்!
+submissions.title|என் submissions
+submissions.subtitle|அனுப்பிய ஒவ்வொரு proof-உம், live review state-உம்.
+submissions.emptyTitle|இன்னும் submissions இல்லை
+submissions.emptyBody|ஒரு mission முடித்தவுடன் proof timeline இங்கே தெரியும்.
+submissions.browseMissions|Missions பாருங்கள்
+submissions.proofUrl|Proof URL
+submissions.proofScreenshot|Screenshot
+submissions.noProof|Proof attached இல்லை
+leaderboard.title|லீடர்போர்டு
+leaderboard.tabIndividual|Individual
+leaderboard.tabColleges|Colleges
+leaderboard.periodAll|All-time
+leaderboard.periodWeekly|Weekly
+leaderboard.periodMonthly|Monthly
+leaderboard.periodSoon|விரைவில்
+leaderboard.you|நீங்கள்
+leaderboard.rank|#
+leaderboard.pointsCol|புள்ளிகள்
+leaderboard.members|{count} members
+leaderboard.average|avg {points}
+leaderboard.topAmbassador|Top: {name}
+leaderboard.pinnedYou|உங்கள் நிலை
+leaderboard.empty|முதல் approved mission-உடன் rankings தொடங்கும்.
+rewards.title|Reward tiers
+rewards.subtitle|Ledger வர வர tiers unlock ஆகும். Perks திட்டமிடப்பட்டவை — guarantee அல்ல.
+rewards.unlockedAt|{points} pts-ல் unlock ஆனது
+rewards.lockedAt|{points} pts தேவை
+rewards.current|Current tier
+rewards.next|அடுத்தது
+rewards.progressRing|{tier}-க்கு {percent}%
+rewards.tierBronze|Bronze Ambassador
+rewards.tierSilver|Silver Ambassador
+rewards.tierGold|Gold Ambassador
+rewards.tierChampion|Champion Ambassador
+rewards.perkCertificate|Certificate of Recognition (திட்டத்தில்)
+rewards.perkPriority|புதிய missions-க்கு priority access
+rewards.perkMerch|Zyven merch drop (திட்டத்தில்)
+rewards.perkInternship|Internship fast-track consideration
+rewards.perkEvents|Founder & campus event invites
+rewards.perkBadge|Profile badge + leaderboard flair
+rewards.viewLadder|Keep going
+profile.title|சுயவிவரம்
+profile.ambassadorRole|Student Ambassador
+profile.foundingNumber|Founding Ambassador #{number}
+profile.tabAbout|About
+profile.tabCompleted|முடித்த missions
+profile.tabAchievements|Achievements
+profile.tabLedger|புள்ளிகள் வரலாறு
+profile.edit|Profile edit
+profile.editTitle|உங்கள் profile edit
+profile.statPoints|புள்ளிகள்
+profile.statRank|Rank
+profile.statMissions|Missions
+profile.statTier|Tier
+profile.department|துறை
+profile.year|வருடம்
+profile.city|ஊர்
+profile.college|கல்லூரி
+profile.interests|ஆர்வங்கள்
+profile.skills|Skills
+profile.whyJoin|ஏன் join செய்தேன்
+profile.ledgerEmpty|Ledger காலி — முதல் approval விரைவில்.
+profile.achievementUnlocked|{tier} unlock ஆனது
+profile.achievementLocked|{tier} lock
+notifications.title|அறிவிப்புகள்
+notifications.markAll|அனைத்தையும் read
+notifications.empty|இன்னும் அறிவிப்புகள் இல்லை.
+notifications.quickView|சமீபத்திய activity
+notifications.viewAll|அனைத்தும் பாருங்கள்
+notifications.unread|New
+admin.title|Admin console
+admin.statAmbassadors|மொத்த ambassadors
+admin.statPending|Pending reviews
+admin.statPoints|Award ஆன புள்ளிகள்
+admin.statApproval|Approval rate
+admin.queuePreview|Pending queue
+admin.recentAudit|Recent activity log
+admin.navReviews|Reviews
+admin.navAmbassadors|Ambassadors
+admin.navMissions|Missions
+admin.navOverview|Overview
+admin.reviewsTitle|Review queue
+admin.colMission|Mission
+admin.colAmbassador|Ambassador
+admin.colCollege|College
+admin.colState|State
+admin.colSubmitted|Submit ஆனது
+admin.search|தேடு…
+admin.bulkApprove|Select ஆனவற்றை approve ({count})
+admin.bulkConfirmTitle|{count} submissions approve ஆக்குமா?
+admin.bulkConfirmBody|ஒவ்வொரு submission-க்கும் atomic-ஆ புள்ளிகள் award ஆகும். Undo முடியாது.
+admin.approve|Approve
+admin.reject|Reject
+admin.requestChanges|Change கேள்
+admin.decisionPanel|Decision
+admin.reasonPresets|Common reasons
+admin.presetWrongLink|Link தேவையான post-ஐ காட்டவில்லை
+admin.presetUnclearShot|Screenshot clear இல்லை / cropped
+admin.presetNoFollow|Zyven page follow செய்யவில்லை
+admin.presetMissingHashtag|தேவையான hashtags இல்லை
+admin.reasonPlaceholder|எதை fix செய்ய வேண்டும் என்று தெளிவாக எழுதுங்கள்…
+admin.nextInQueue|Queue-ல் அடுத்தது
+admin.shortcutHint|Shortcuts: A approve · R reject
+admin.proofViewer|Proof
+admin.openLink|Link திற
+admin.zoomHint|Screenshot பெரிக்க click செய்யுங்கள்
+admin.ambassadorsTitle|Ambassadors
+admin.statusActive|Active
+admin.statusPending|Pending
+admin.statusSuspended|Suspended
+admin.statusRejected|Rejected
+admin.suspend|Suspend
+admin.reactivate|Reactivate
+admin.viewProfile|Profile பாருங்கள்
+admin.drawerSubmissions|Submissions
+admin.drawerLedger|Ledger
+admin.missionsTitle|Missions
+admin.createMission|புதிய mission
+admin.editMission|Mission edit
+admin.missionStatusDraft|Draft
+admin.missionStatusLive|Live
+admin.missionStatusPaused|Paused
+admin.missionStatusArchived|Archived
+admin.fieldTitleEn|Title (English)
+admin.fieldTitleTa|Title (தமிழ்)
+admin.fieldDescEn|Description (English)
+admin.fieldDescTa|Description (தமிழ்)
+admin.fieldSlug|Slug
+admin.fieldPoints|புள்ளிகள்
+admin.fieldProof|Proof types
+admin.fieldDeadline|Deadline (optional)
+admin.fieldExternal|External URL (optional)
+admin.saved|Mission save ஆனது
+admin.approvedToast|Approve ஆனது — புள்ளிகள் award
+admin.rejectedToast|Reason-உடன் reject
+admin.changesToast|Change கேட்கப்பட்டது
+admin.alreadyApproved|ஏற்கனவே approve (double award இல்லை)
+states.AVAILABLE|Available
+states.STARTED|Start ஆனது
+states.SUBMITTED|Submit ஆனது
+states.UNDER_REVIEW|Review-ல்
+states.APPROVED|Approve ஆனது
+states.REJECTED|Reject ஆனது
+states.LOCKED|விரைவில்
+celebration.approvedTitle|Mission approved 🎉
+celebration.earned|+{points}
+celebration.progressToNext|{tier}-க்கு {points}
+celebration.rankUp|#{new} (+{delta})
+celebration.dismiss|Keep going
+tierUnlock.title|{tier} unlocked 🏅
+tierUnlock.subtitle|உங்கள் ledger {threshold} புள்ளிகளை கடந்துவிட்டது.
+tierUnlock.perksTitle|என்ன unlock ஆகிறது
+tierUnlock.ctaRewards|Rewards பாருங்கள்
+tierUnlock.ctaKeep|Keep going
+devPanel.title|Dev panel
+devPanel.role|Role
+devPanel.roleAmbassador|Ambassador
+devPanel.roleAdmin|Admin
+devPanel.theme|Theme
+devPanel.locale|மொழி
+devPanel.resetSeed|Seed reset
+devPanel.loadDemo|Progress demo load (80 pts)
+devPanel.simulateApprove|கடைசி submission approve simulate
+devPanel.submissionStates|என் submissions
+devPanel.setState|State set
+devPanel.approvalRequired|Signup-க்கு approval தேவை
+devPanel.slowNetwork|Slow network (2s)
+devPanel.reducedMotion|Reduced motion preview
+devPanel.onlyDev|Dev panel development-ல் மட்டும் அல்லது ?dev=1-ல் தெரியும்.
+footer.rights|© {year} Zyven. மாணவர்களுக்காக, மாணவர்களால்.
+footer.links|Program links
+footer.legal|Legal
+footer.terms|Terms
+footer.privacy|Privacy
+footer.guidelines|Ambassador guidelines
+footer.contactUs|தொடர்பு
+footer.madeWith|Founding Cohort 2026
+
+common.loading|ஏற்றுகிறது…
+common.retry|மீண்டும் முயற்சிக்கவும்
+common.cancel|ரத்து
+common.save|சேமி
+common.close|மூடு
+common.back|பின் செல்
+common.next|அடுத்து
+common.continue|தொடரவும்
+common.copy|நகலெடு
+common.copied|நகலெடுக்கப்பட்டது
+common.openLink|இணைப்பை திறக்கவும்
+common.demoData|டெமோ தரவு — ரியல் ரேங்கிங் தொடக்கத்தில் தொடங்கும்
+common.pointsUnit|புள்ளிகள்
+common.comingSoon|விரைவில்
+common.offline|நீங்கள் ஆஃப்லைனில் உள்ளதாக தெரிகிறது. தொடர இணையத்தை இணைக்கவும்.
+common.errorGeneric|ஏதோ தவறு நடந்தது. மீண்டும் முயற்சிக்கவும்.
+common.signOut|வெளியேறு
+common.justNow|இப்போது
+common.minutesAgo|{count} நிமிடம் முன்
+common.hoursAgo|{count} மணி நேரம் முன்
+common.daysAgo|{count} நாள் முன்
+nav.home|முகப்பு
+nav.about|பற்றி
+nav.howItWorks|எப்படி வேலை செய்கிறது
+nav.benefits|பயன்கள்
+nav.leaderboard|லீடர்போர்டு
+nav.contact|தொடர்பு
+nav.login|உள்நுழைவு
+nav.register|பதிவு
+nav.dashboard|டாஷ்போர்டு
+nav.missions|மிஷன்கள்
+nav.rewards|ரிவார்டுகள்
+nav.profile|சுயவிவரம்
+nav.submissions|என் சப்மிஷன்கள்
+nav.notifications|அறிவிப்புகள்
+nav.menu|மெனு
+nav.adminArea|அட்மின்
