@@ -1,30 +1,6 @@
-import type {
-  AmbassadorProfile,
-  Announcement,
-  AppNotification,
-  AuditLog,
-  College,
-  Mission,
-  PointTransaction,
-  Reward,
-  Submission,
-  User,
-} from "../types";
+import type { AppNotification, AuditLog, College, Mission, Reward, User } from "../types";
 import { createEmptyStore, type StoreShape } from "./store";
 
-/* Deterministic pseudo-random for stable demo data. */
-function mulberry32(seed: number) {
-  let a = seed;
-  return () => {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-const rand = mulberry32(20261018);
 const daysAgo = (n: number) => new Date(Date.now() - n * 864e5).toISOString();
 
 export const COLLEGES: College[] = [
@@ -36,32 +12,8 @@ export const COLLEGES: College[] = [
   { id: "srm", name: "SRM Ramapuram", shortName: "SRM", color: "#8B5CF6" },
 ];
 
-export const DEMO_NAMES = [
-  "Arjun Karthikeyan",
-  "Priya Lakshmi",
-  "Vignesh Kumar",
-  "Divya Bharathi",
-  "Karthik Raja",
-  "Meena Sundaram",
-  "Surya Prakash",
-  "Anitha Rajesh",
-  "Manoj Venkat",
-  "Swetha Nair",
-  "Ramesh Babu",
-  "Lakshmi Priyaa",
-  "Dinesh Murugan",
-  "Fathima Noor",
-  "Gokul Anand",
-  "Harini Sridhar",
-  "Immanuel John",
-  "Jagan Mohan",
-  "Keerthana Das",
-  "Loganathan Pillai",
-  "Monica Fernandes",
-  "Naveen Chandra",
-  "Oviya Shankar",
-  "Pradeep Eswari",
-];
+/** Colleges offered in the registration searchable select. */
+export const COLLEGE_OPTIONS = COLLEGES.map((c) => c.name);
 
 export const LINKEDIN_TEMPLATE_EN = `Excited to share that I've joined Zyven as a Student Ambassador! 🎉
 
@@ -308,126 +260,204 @@ function rewards(): Reward[] {
   ];
 }
 
-/** Seed the whole mock database. Thangaraj starts clean: 0 points, no submissions. */
+/**
+ * Seed data for the mock backend. Each account is a REAL login (email +
+ * password) so authentication behaves like a production system:
+ *   student → thangaraj@student.zyven.app / student123  (starts clean: 0 pts)
+ *   history → priya@student.zyven.app / student123      (approved + rejected items)
+ *   admin   → admin@zyven.app / admin123
+ * No duplicate users, profiles, submissions or ledger rows exist per user.
+ */
 export function buildSeed(): StoreShape {
   const s = createEmptyStore();
   s.colleges = COLLEGES;
   s.missions = missions();
   s.rewards = rewards();
 
-  /* Current demo ambassador — clean first-run experience. */
-  const thangaraj: User = {
-    id: "usr_thangaraj",
-    role: "ambassador",
-    name: "Thangaraj",
-    email: "thangaraj@example.com",
-  };
-  s.users.push(thangaraj);
-  s.profiles.push({
-    userId: thangaraj.id,
-    college: "Muthayammal Engineering College",
-    department: "CSBS",
-    year: 2,
-    city: "Rasipuram",
-    interests: ["social-media", "public-speaking"],
-    skills: ["content"],
-    whyJoin: "I want to build my network and represent my college.",
-    status: "active",
-    joinedAt: daysAgo(2),
-    cohortNumber: 37,
-    isDemo: false,
-  });
+  /* ---- accounts (passwords live only inside the mock store) ---- */
+  const accounts: Array<{ user: User; password: string }> = [
+    {
+      user: {
+        id: "usr_thangaraj",
+        role: "ambassador",
+        name: "Thangaraj",
+        email: "thangaraj@student.zyven.app",
+        phone: "+91 90000 00001",
+      },
+      password: "student123",
+    },
+    {
+      user: { id: "usr_priya", role: "ambassador", name: "Priya Lakshmi", email: "priya@student.zyven.app" },
+      password: "student123",
+    },
+    {
+      user: { id: "usr_vignesh", role: "ambassador", name: "Vignesh Kumar", email: "vignesh@student.zyven.app" },
+      password: "student123",
+    },
+    {
+      user: { id: "usr_divya", role: "ambassador", name: "Divya Bharathi", email: "divya@student.zyven.app" },
+      password: "student123",
+    },
+    {
+      user: { id: "usr_karthik", role: "ambassador", name: "Karthik Raja", email: "karthik@student.zyven.app" },
+      password: "student123",
+    },
+    {
+      user: { id: "usr_admin", role: "admin", name: "Zyven Admin", email: "admin@zyven.app" },
+      password: "admin123",
+    },
+  ];
+  accounts.forEach((a) => s.users.push(a.user));
+  s.passwords = Object.fromEntries(accounts.map((a) => [a.user.id, a.password]));
 
-  const admin: User = {
-    id: "usr_admin",
-    role: "admin",
-    name: "Zyven Admin",
-    email: "admin@zyven.app",
-  };
-  s.users.push(admin);
-
-  /* 24 demo ambassadors across 6 colleges, varied points 20..420. */
-  DEMO_NAMES.forEach((name, i) => {
-    const user: User = { id: `usr_demo_${i}`, role: "ambassador", name, email: `${name.split(" ")[0]!.toLowerCase()}${i}@demo.zyven.app` };
-    const college = COLLEGES[i % COLLEGES.length]!;
-    s.users.push(user);
-    s.profiles.push({
-      userId: user.id,
-      college: college.name,
-      department: ["CSE", "ECE", "MECH", "CSBS", "IT", "CIVIL"][Math.floor(rand() * 6)]!,
-      year: (1 + Math.floor(rand() * 4)) as 1 | 2 | 3 | 4,
-      city: ["Namakkal", "Salem", "Erode", "Coimbatore", "Rasipuram", "Tiruchy"][Math.floor(rand() * 6)]!,
-      interests: [],
-      skills: [],
-      whyJoin: "Demo profile.",
+  /* ---- profiles (exactly one per ambassador) ---- */
+  s.profiles = [
+    {
+      userId: "usr_thangaraj",
+      college: "Muthayammal Engineering College",
+      department: "CSBS",
+      year: 2,
+      city: "Rasipuram",
+      linkedin: "https://www.linkedin.com/in/thangaraj",
+      interests: ["social-media", "tech"],
+      skills: ["content", "public speaking"],
+      whyJoin: "I want to build my network and represent my college in the founding cohort.",
       status: "active",
-      joinedAt: daysAgo(Math.floor(rand() * 25) + 3),
-      cohortNumber: i + 1,
-      isDemo: true,
-    });
+      joinedAt: daysAgo(6),
+      cohortNumber: 1,
+      isDemo: false,
+    },
+    {
+      userId: "usr_priya",
+      college: "Kongu Engineering College",
+      department: "CSE",
+      year: 3,
+      city: "Erode",
+      linkedin: "https://www.linkedin.com/in/priyalakshmi",
+      interests: ["content", "design"],
+      skills: ["video editing"],
+      whyJoin: "Love building communities and creating content.",
+      status: "active",
+      joinedAt: daysAgo(28),
+      cohortNumber: 2,
+      isDemo: false,
+    },
+    {
+      userId: "usr_vignesh",
+      college: "SRM Ramapuram",
+      department: "IT",
+      year: 4,
+      city: "Chennai",
+      interests: ["events", "speaking"],
+      skills: ["anchoring"],
+      whyJoin: "Campus events are my thing.",
+      status: "active",
+      joinedAt: daysAgo(26),
+      cohortNumber: 3,
+      isDemo: false,
+    },
+    {
+      userId: "usr_divya",
+      college: "PSG College of Technology",
+      department: "ECE",
+      year: 1,
+      city: "Coimbatore",
+      interests: ["community", "branding"],
+      skills: ["writing"],
+      whyJoin: "First year already, first ambassador always.",
+      status: "active",
+      joinedAt: daysAgo(20),
+      cohortNumber: 4,
+      isDemo: false,
+    },
+    {
+      userId: "usr_karthik",
+      college: "Sona College of Technology",
+      department: "MECH",
+      year: 2,
+      city: "Salem",
+      interests: ["tech", "social-media"],
+      skills: ["canva"],
+      whyJoin: "Want early exposure to industry.",
+      status: "active",
+      joinedAt: daysAgo(15),
+      cohortNumber: 5,
+      isDemo: false,
+    },
+  ];
 
-    const targetPoints = 20 + Math.floor(rand() * 400);
-    // Compose ledger entries out of mission values so sums look organic.
-    let remaining = targetPoints;
-    let guard = 0;
-    while (remaining > 0 && guard < 12) {
-      guard += 1;
-      const options = [50, 30, 40, 90, 120].filter((p) => p <= remaining);
-      if (options.length === 0) break;
-      const pts = options[Math.floor(rand() * options.length)]!;
-      remaining -= pts;
-      const missionId = ["mis_linkedin", "mis_whatsapp", "mis_instagram", "mis_referral", "mis_event"][
-        Math.floor(rand() * 5)
-      ]!;
-      const subId = `sub_seed_${i}_${guard}`;
-      const submittedAt = daysAgo(Math.floor(rand() * 20) + 1);
-      s.submissions.push({
-        id: subId,
-        missionId,
-        ambassadorId: user.id,
-        state: "APPROVED",
-        submittedAt,
-        reviewedAt: submittedAt,
-        reviewerId: admin.id,
-      });
-      s.ledger.push({
-        id: `pt_${subId}`,
-        ambassadorId: user.id,
-        submissionId: subId,
-        missionId,
-        points: pts,
-        reason: "seed",
-        createdAt: submittedAt,
-      });
-    }
-  });
-
-  /* 3 pending submissions so the admin queue is not empty. */
-  const pendables = [0, 3, 7];
-  pendables.forEach((idx, i) => {
-    const demoUser = s.users.find((u) => u.id === `usr_demo_${idx}`);
-    if (!demoUser) return;
-    const states: Submission["state"][] = ["SUBMITTED", "UNDER_REVIEW", "SUBMITTED"];
-    const missionIds = ["mis_linkedin", "mis_whatsapp", "mis_linkedin"];
+  /* ---- approved history (one row per submission in both tables) ---- */
+  const mkApproved = (id: string, missionId: string, userId: string, pts: number, ago: number) => {
+    const at = daysAgo(ago);
     s.submissions.push({
-      id: `sub_pending_${i}`,
-      missionId: missionIds[i]!,
-      ambassadorId: demoUser.id,
-      state: states[i]!,
-      proofUrl:
-        missionIds[i] === "mis_linkedin"
-          ? `https://www.linkedin.com/feed/update/urn:li:activity:7${2000000000000 + i}/`
-          : undefined,
-      normalizedUrl:
-        missionIds[i] === "mis_linkedin"
-          ? `linkedin.com/feed/update/urn:li:activity:7${2000000000000 + i}`
-          : undefined,
-      note: "Please verify my submission.",
-      submittedAt: daysAgo(i + 1),
+      id,
+      missionId,
+      ambassadorId: userId,
+      state: "APPROVED",
+      submittedAt: at,
+      reviewedAt: at,
+      reviewerId: "usr_admin",
     });
+    s.ledger.push({
+      id: `pt_${id}`,
+      ambassadorId: userId,
+      submissionId: id,
+      missionId,
+      points: pts,
+      reason: "Approved mission",
+      createdAt: at,
+    });
+  };
+  mkApproved("sub_priya_li", "mis_linkedin", "usr_priya", 50, 20);
+  mkApproved("sub_priya_wa", "mis_whatsapp", "usr_priya", 30, 18);
+  mkApproved("sub_vig_li", "mis_linkedin", "usr_vignesh", 50, 12);
+  mkApproved("sub_div_wa", "mis_whatsapp", "usr_divya", 30, 9);
+
+  /* ---- review queue (pending items from real accounts) ---- */
+  s.submissions.push(
+    {
+      id: "sub_queue_1",
+      missionId: "mis_linkedin",
+      ambassadorId: "usr_vignesh",
+      state: "SUBMITTED",
+      proofUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7123456789012/",
+      normalizedUrl: "linkedin.com/feed/update/urn:li:activity:7123456789012",
+      note: "Posted about Zyven launch week!",
+      submittedAt: daysAgo(1),
+    },
+    {
+      id: "sub_queue_2",
+      missionId: "mis_whatsapp",
+      ambassadorId: "usr_karthik",
+      state: "UNDER_REVIEW",
+      note: "Joined the community, screenshot attached during signup.",
+      submittedAt: daysAgo(2),
+    },
+    {
+      id: "sub_queue_3",
+      missionId: "mis_linkedin",
+      ambassadorId: "usr_divya",
+      state: "SUBMITTED",
+      proofUrl: "https://www.linkedin.com/posts/zyven-community-first-post-activity-7123456789013",
+      normalizedUrl: "linkedin.com/posts/zyven-community-first-post-activity-7123456789013",
+      submittedAt: daysAgo(3),
+    },
+  );
+
+  /* ---- one rejected example so the resubmit path exists ---- */
+  s.submissions.push({
+    id: "sub_rejected_1",
+    missionId: "mis_whatsapp",
+    ambassadorId: "usr_priya",
+    state: "REJECTED",
+    note: "Oops, uploaded the wrong screenshot.",
+    submittedAt: daysAgo(5),
+    reviewedAt: daysAgo(4),
+    reviewerId: "usr_admin",
+    reviewReason: "The screenshot does not show your name in the member list. Please retake it.",
   });
 
-  /* Announcements */
+  /* ---- announcements ---- */
   s.announcements = [
     {
       id: "ann_1",
@@ -445,69 +475,46 @@ export function buildSeed(): StoreShape {
     },
   ];
 
-  /* Notifications + audit entries for a sample of the seeded approvals. */
-  const notif: AppNotification[] = [];
-  const audit: AuditLog[] = [];
-  s.submissions
-    .filter((sub) => sub.state === "APPROVED")
-    .slice(0, 6)
-    .forEach((sub) => {
-      audit.push({
-        id: `aud_${sub.id}`,
-        actorId: admin.id,
-        action: "submission.approve",
-        entity: "submission",
-        entityId: sub.id,
-        createdAt: sub.reviewedAt ?? sub.submittedAt ?? daysAgo(5),
-      });
-      const mission = s.missions.find((m) => m.id === sub.missionId);
-      notif.push({
-        id: `not_${sub.id}`,
-        userId: sub.ambassadorId,
-        type: "points_awarded",
-        title: "Mission approved",
-        body: `+${mission?.points ?? 0} points added to your ledger.`,
-        createdAt: sub.reviewedAt ?? sub.submittedAt ?? daysAgo(5),
-        href: "/dashboard",
-      });
-    });
-
-  /* One REJECTED submission (with notification) so the resubmit path is demoable. */
-  const rejectedUser = s.users.find((u) => u.id === "usr_demo_2");
-  if (rejectedUser) {
-    const rejSubId = "sub_rejected_0";
-    s.submissions.push({
-      id: rejSubId,
-      missionId: "mis_linkedin",
-      ambassadorId: rejectedUser.id,
-      state: "REJECTED",
-      proofUrl: "https://www.linkedin.com/in/someone",
-      normalizedUrl: "linkedin.com/in/someone",
-      submittedAt: daysAgo(3),
-      reviewedAt: daysAgo(2),
-      reviewerId: admin.id,
-      reviewReason: "That link points to a profile, not a post. Paste the post URL.",
-    });
-    audit.push({
-      id: `aud_${rejSubId}`,
-      actorId: admin.id,
-      action: "submission.reject",
-      entity: "submission",
-      entityId: rejSubId,
-      createdAt: daysAgo(2),
-    });
-    notif.push({
-      id: `not_${rejSubId}`,
-      userId: rejectedUser.id,
+  /* ---- notifications (scoped per user, no duplicates) ---- */
+  const notif: AppNotification[] = [
+    {
+      id: "not_priya_rej",
+      userId: "usr_priya",
       type: "submission_rejected",
-      title: "Changes needed on your LinkedIn submission",
-      body: "That link points to a profile, not a post. Please resubmit with the post URL.",
-      createdAt: daysAgo(2),
-      href: "/missions/linkedin-follow-post",
-    });
-  }
-
+      title: "Changes needed on your WhatsApp submission",
+      body: "The screenshot does not show your name in the member list. Please retake it.",
+      createdAt: daysAgo(4),
+      href: "/missions/whatsapp-community",
+    },
+    {
+      id: "not_priya_pts",
+      userId: "usr_priya",
+      type: "points_awarded",
+      title: "Mission approved 🎉",
+      body: '+30 points for "Join the Zyven WhatsApp Community". Keep going!',
+      createdAt: daysAgo(18),
+      href: "/dashboard",
+    },
+    {
+      id: "not_vig_sub",
+      userId: "usr_vignesh",
+      type: "submission_approved",
+      title: "Submission received",
+      body: 'We received your proof for "Follow & Post on LinkedIn". Verification usually takes up to 24 hours.',
+      createdAt: daysAgo(1),
+      href: "/submissions",
+    },
+  ];
   s.notifications = notif;
+
+  /* ---- audit log ---- */
+  const audit: AuditLog[] = [
+    { id: "aud_1", actorId: "usr_admin", action: "submission.reject", entity: "submission", entityId: "sub_rejected_1", createdAt: daysAgo(4) },
+    { id: "aud_2", actorId: "usr_admin", action: "submission.approve", entity: "submission", entityId: "sub_priya_wa", createdAt: daysAgo(18) },
+    { id: "aud_3", actorId: "usr_admin", action: "submission.approve", entity: "submission", entityId: "sub_priya_li", createdAt: daysAgo(20) },
+    { id: "aud_4", actorId: "usr_karthik", action: "ambassador.register", entity: "profile", entityId: "usr_karthik", createdAt: daysAgo(15) },
+    { id: "aud_5", actorId: "usr_thangaraj", action: "ambassador.register", entity: "profile", entityId: "usr_thangaraj", createdAt: daysAgo(6) },
+  ];
   s.auditLog = audit;
 
   return s;

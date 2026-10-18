@@ -25,12 +25,14 @@ export interface StoreShape {
   colleges: College[];
   settings: MockSettings;
   sessionUserId: string | null;
+  /** mock-only credential vault (userId -> password). Never exposed via hooks. */
+  passwords: Record<string, string>;
   seenTiers: Record<string, string[]>; // userId -> tiers already celebrated
   version: number;
 }
 
-const STORAGE_KEY = "zyven-mock-store-v1";
-export const STORE_VERSION = 1;
+const STORAGE_KEY = "zyven-mock-store-v2";
+export const STORE_VERSION = 2;
 
 type Listener = () => void;
 
@@ -49,6 +51,7 @@ export function createEmptyStore(): StoreShape {
     colleges: [],
     settings: { approvalRequired: false, slowNetwork: false },
     sessionUserId: null,
+    passwords: {},
     seenTiers: {},
     version: STORE_VERSION,
   };

@@ -187,7 +187,7 @@ export type Submission = z.infer<typeof submissionSchema>;
 export const pointTransactionSchema = z.object({
   id: z.string(),
   ambassadorId: z.string(),
-  submissionId: z.string().unique(),
+  submissionId: z.string(),
   missionId: z.string(),
   points: z.number().int(),
   reason: z.string(),

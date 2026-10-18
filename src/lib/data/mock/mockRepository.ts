@@ -109,58 +109,33 @@ export class MockRepository implements Repository {
     return this.db().profiles.find((p) => p.userId === userId);
   }
 
-  /* ---------------- session ---------------- */
+  /* ---------------- accounts + session ---------------- */
 
   async getSession(): Promise<Session> {
-    await simulateLatency();
     const id = this.db().sessionUserId;
     if (!id) return { user: null, profile: null };
     const user = this.db().users.find((u) => u.id === id) ?? null;
-    return { user, profile: user ? (this.profileOf(user.id) ?? null) : null };
+    const profile = user ? this.profileOf(user.id) : null;
+    return { user: user ? { ...user } : null, profile: profile ? { ...profile } : null };
   }
 
-  async loginWithGoogleMock(email?: string): Promise<Session> {
-    await simulateLatency();
-    const targetEmail = email?.trim() || "thangaraj@example.com";
-    let user = this.db().users.find((u) => u.email === targetEmail);
-    if (!user) {
-      user = { id: uid("usr"), role: "ambassador", name: "New Student", email: targetEmail };
-      const created = user;
-      store.set((d) => {
-        d.users.push(created);
-        d.sessionUserId = created.id;
-      });
-      return { user: created, profile: null };
-    }
-    const found = user;
-    store.set((d) => {
-      d.sessionUserId = found.id;
-    });
-    return { user: found, profile: this.profileOf(found.id) ?? null };
-  }
-
+  /**
+   * Email + password login. Unknown email and wrong password return the SAME
+   * generic error so account existence is never leaked to potential attackers.
+   */
   async loginWithEmail(email: string, password: string): Promise<Session> {
     await simulateLatency();
-    if (!email || !password) throw new Error("INVALID_CREDENTIALS");
-    const isAdmin = email.toLowerCase() === ADMIN_EMAIL;
-    let user = this.db().users.find((u) => u.email.toLowerCase() === email.toLowerCase());
-    if (!user) {
-      if (!isAdmin) throw new Error("NO_ACCOUNT");
-      user = { id: "usr_admin", role: "admin", name: "Zyven Admin", email: ADMIN_EMAIL };
-      const created = user;
-      store.set((d) => {
-        d.users.push(created);
-      });
-    }
-    const found = user;
+    const e = email.trim().toLowerCase();
+    if (!e || !password) throw new Error("INVALID_CREDENTIALS");
+    const user = this.db().users.find((u) => u.email.toLowerCase() === e);
+    if (!user) throw new Error("INVALID_CREDENTIALS");
+    if (this.db().passwords[user.id] !== password) throw new Error("INVALID_CREDENTIALS");
+    const profile = this.profileOf(user.id);
+    if (profile && profile.status === "rejected") throw new Error("APPLICATION_REJECTED");
     store.set((d) => {
-      d.sessionUserId = found.id;
+      d.sessionUserId = user.id;
     });
-    return { user: found, profile: this.profileOf(found.id) ?? null };
-  }
-
-  async loginAdminMock(): Promise<Session> {
-    return this.loginWithEmail(ADMIN_EMAIL, "demo-admin");
+    return { user: { ...user }, profile: profile ? { ...profile } : null };
   }
 
   async logout(): Promise<void> {
@@ -170,49 +145,54 @@ export class MockRepository implements Repository {
     });
   }
 
+  /** Creates a real account (email + password) with status "pending". */
   async registerAmbassador(input: RegisterInput): Promise<Session> {
     await simulateLatency();
-    const existing = this.db().users.find((u) => u.email.toLowerCase() === input.email.toLowerCase());
-    if (existing) throw new Error("EMAIL_TAKEN");
-    const cohort = this.db().profiles.length + 13; // founding cohort numbering continues
+    const email = input.email.trim().toLowerCase();
+    if (!email) throw new Error("REQUIRED");
+    if (!input.password || input.password.length < 6) throw new Error("PASSWORD_TOO_SHORT");
+    if (this.db().users.some((u) => u.email.toLowerCase() === email)) throw new Error("EMAIL_TAKEN");
+    const userId = uid("usr");
+    const now = nowIso();
     const user: User = {
-      id: uid("usr"),
+      id: userId,
       role: "ambassador",
-      name: input.name,
-      email: input.email,
-      phone: input.phone,
+      name: input.name.trim(),
+      email,
+      phone: input.phone?.trim() || undefined,
     };
     const profile: AmbassadorProfile = {
-      userId: user.id,
-      college: input.college,
-      department: input.department,
+      userId,
+      college: input.college.trim(),
+      department: input.department.trim(),
       year: input.year,
-      city: input.city,
-      studentId: input.studentId,
-      linkedin: input.linkedin,
-      instagram: input.instagram,
+      city: input.city.trim(),
+      studentId: input.studentId?.trim() || undefined,
+      linkedin: input.linkedin?.trim() || undefined,
+      instagram: input.instagram?.trim() || undefined,
       interests: input.interests,
       skills: input.skills,
       whyJoin: input.whyJoin,
-      status: this.db().settings.approvalRequired ? "pending" : "active",
-      joinedAt: nowIso(),
-      cohortNumber: cohort,
+      status: "pending",
+      joinedAt: now,
+      cohortNumber: this.db().profiles.length + 1,
       isDemo: false,
     };
     store.set((d) => {
       d.users.push(user);
+      d.passwords[userId] = input.password;
       d.profiles.push(profile);
-      d.sessionUserId = user.id;
+      d.sessionUserId = userId;
       d.auditLog.unshift({
         id: uid("aud"),
-        actorId: user.id,
+        actorId: userId,
         action: "ambassador.register",
         entity: "profile",
-        entityId: user.id,
-        createdAt: nowIso(),
+        entityId: userId,
+        createdAt: now,
       });
     });
-    return { user, profile };
+    return { user: { ...user }, profile: { ...profile } };
   }
 
   async updateProfile(patch: Partial<AmbassadorProfile>): Promise<AmbassadorProfile> {
@@ -223,14 +203,13 @@ export class MockRepository implements Repository {
       const p = d.profiles.find((x) => x.userId === me.id);
       if (!p) return;
       Object.assign(p, patch);
-      updated = p;
+      updated = { ...p };
     });
     if (!updated) throw new Error("NO_PROFILE");
     return updated;
   }
 
   async getMe() {
-    await simulateLatency();
     const id = this.db().sessionUserId;
     if (!id) return null;
     const user = this.db().users.find((u) => u.id === id);
@@ -439,7 +418,7 @@ export class MockRepository implements Repository {
     const profiles = this.db().profiles.filter((p) => p.status === "active");
 
     const individual: LeaderboardEntry[] = (() => {
-      const entries = profiles.map((p) => {
+      const rawEntries = profiles.map((p) => {
         const t = totals.get(p.userId);
         return {
           ambassadorId: p.userId,
@@ -451,7 +430,10 @@ export class MockRepository implements Repository {
           isDemo: p.isDemo,
         };
       });
-      const ranked = rankEntries(entries);
+      const ranked = rankEntries(
+        rawEntries.map((e) => ({ id: e.ambassadorId, total: e.points, reachedAt: e.reachedAt })),
+      );
+      const entries = rawEntries;
       const rewards = this.db().rewards;
       return entries
         .map((e) => {
@@ -501,7 +483,6 @@ export class MockRepository implements Repository {
       return rows.map((r, i) => ({ rank: i + 1, ...r }));
     })();
 
-    void opts.period; // weekly/monthly are UI-disabled "soon" chips in this phase
     return { individual, college };
   }
 
@@ -753,109 +734,6 @@ export class MockRepository implements Repository {
   async getAuditLog() {
     await simulateLatency();
     return this.db().auditLog.slice(0, 50);
-  }
-
-  /* ---------------- dev helpers ---------------- */
-
-  async resetSeed() {
-    store.replace(buildSeed());
-  }
-
-  async setSubmissionState(id: string, state: Submission["state"]) {
-    // DevPanel shortcut: route approvals through the atomic function.
-    if (state === "APPROVED") {
-      const adminExists = this.db().users.some((u) => u.role === "admin");
-      const prevSession = this.db().sessionUserId;
-      if (!adminExists) {
-        store.set((d) => {
-          d.users.push({ id: "usr_admin", role: "admin", name: "Zyven Admin", email: ADMIN_EMAIL });
-        });
-      }
-      store.set((d) => {
-        d.sessionUserId = "usr_admin";
-      });
-      await this.approveSubmission(id);
-      store.set((d) => {
-        d.sessionUserId = prevSession;
-      });
-      return;
-    }
-    store.set((d) => {
-      const s = d.submissions.find((x) => x.id === id);
-      if (!s) return;
-      s.state = state;
-      if (state === "SUBMITTED" || state === "UNDER_REVIEW") s.submittedAt = s.submittedAt ?? nowIso();
-    });
-  }
-
-  async simulateAdminApproveLatest(): Promise<Submission | null> {
-    const queue = this.db()
-      .submissions.filter((s) => s.state === "UNDER_REVIEW" || s.state === "SUBMITTED")
-      .sort((a, b) => (a.submittedAt ?? "").localeCompare(b.submittedAt ?? ""));
-    const latest = queue[queue.length - 1];
-    if (!latest) return null;
-    const prevSession = this.db().sessionUserId;
-    if (!this.db().users.some((u) => u.id === "usr_admin")) {
-      store.set((d) => {
-        d.users.push({ id: "usr_admin", role: "admin", name: "Zyven Admin", email: ADMIN_EMAIL });
-      });
-    }
-    store.set((d) => {
-      d.sessionUserId = "usr_admin";
-    });
-    const result = await this.approveSubmission(latest.id);
-    store.set((d) => {
-      d.sessionUserId = prevSession;
-    });
-    return result;
-  }
-
-  /** Load progress demo: gives Thangaraj 80 pts (Bronze unlocked, 70 to Silver). */
-  async loadProgressDemo() {
-    const target = this.db().profiles.find((p) => p.userId === "usr_thangaraj");
-    if (!target) return;
-    const now = nowIso();
-    store.set((d) => {
-      // Clear any prior demo progress for the current user first.
-      d.submissions = d.submissions.filter(
-        (s) => !(s.ambassadorId === "usr_thangaraj" && s.id.startsWith("sub_dev_")),
-      );
-      d.ledger = d.ledger.filter((t) => t.ambassadorId !== "usr_thangaraj");
-      const mk = (id: string, missionId: string, pts: number) => {
-        d.submissions.push({
-          id,
-          missionId,
-          ambassadorId: "usr_thangaraj",
-          state: "APPROVED",
-          submittedAt: now,
-          reviewedAt: now,
-          reviewerId: "usr_admin",
-        });
-        d.ledger.push({
-          id: uid("pt"),
-          ambassadorId: "usr_thangaraj",
-          submissionId: id,
-          missionId,
-          points: pts,
-          reason: "Dev demo",
-          createdAt: now,
-        });
-      };
-      mk("sub_dev_li", "mis_linkedin", 50);
-      mk("sub_dev_wa", "mis_whatsapp", 30);
-    });
-  }
-
-  async setApprovalRequired(v: boolean) {
-    store.set((d) => {
-      d.settings.approvalRequired = v;
-    });
-  }
-
-  async setSlowNetwork(v: boolean) {
-    store.set((d) => {
-      d.settings.slowNetwork = v;
-    });
   }
 
   subscribe(cb: () => void) {
